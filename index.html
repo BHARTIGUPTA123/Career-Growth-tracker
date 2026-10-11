@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>Career Growth Tracker | Odoo • Python • AWS</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#172033;--muted:#687386;--line:#e4e8f0;--accent:#645bdf;--accent2:#e9e7ff;--green:#16865b;--orange:#b96b10;--shadow:0 10px 30px rgba(26,38,64,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,textarea{font:inherit}
+.hero{background:linear-gradient(135deg,#101827,#252c51 70%,#4e49a6);color:white;padding:28px 18px 30px}.wrap{max-width:1050px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:800;opacity:.75}.hero h1{font-size:clamp(27px,5vw,42px);line-height:1.12;margin:9px 0}.hero p{max-width:680px;color:#dce2f3;margin:0}.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.tag{border:1px solid #ffffff3d;background:#ffffff12;padding:6px 10px;border-radius:99px;font-size:12px}
+main{padding:18px;max-width:1050px;margin:auto}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:-34px;position:relative}.stat,.panel,.day-card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:15px}.stat .num{font-size:26px;font-weight:800;letter-spacing:-.04em}.stat .label{font-size:12px;color:var(--muted)}.bar{height:7px;background:#eceef5;border-radius:99px;overflow:hidden;margin-top:9px}.bar span{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .2s}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 14px}.toolbar select,.toolbar button,.btn{border:1px solid var(--line);background:white;border-radius:10px;padding:10px 12px;color:var(--ink);cursor:pointer}.toolbar select{flex:1;min-width:190px}.btn.primary{background:var(--accent);border-color:var(--accent);color:white}.btn.danger{color:#a42a39}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:22px 0 12px}.section-head h2{font-size:21px;margin:0}.section-head p{font-size:13px;color:var(--muted);margin:3px 0 0}.week-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.day-card{padding:16px;box-shadow:none}.day-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.day-top h3{font-size:16px;margin:0 0 3px}.day-sub{color:var(--muted);font-size:12px}.pill{font-size:11px;font-weight:750;padding:4px 8px;border-radius:99px;background:#f0efff;color:#554bc5;white-space:nowrap}.pill.done{background:#e2f6eb;color:#13744d}.task{display:flex;gap:9px;align-items:flex-start;margin:12px 0 0;padding-top:10px;border-top:1px solid #f0f1f5}.task input{accent-color:var(--accent);width:18px;height:18px;flex:0 0 auto;margin:2px 0 0}.task label{cursor:pointer;font-size:13px}.task strong{display:block;font-size:13px}.task small{display:block;color:var(--muted);font-size:12px;margin-top:2px}.notes{width:100%;margin-top:12px;resize:vertical;min-height:55px;border:1px solid var(--line);border-radius:9px;padding:9px;font-size:12px}.note-label{font-size:11px;color:var(--muted);margin-top:8px;display:block}.empty{padding:25px;color:var(--muted);text-align:center}.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.panel{padding:17px;box-shadow:none}.panel h3{margin:0 0 8px}.panel p,.panel li{font-size:13px;color:var(--muted)}.panel ul{padding-left:18px}.footer{color:var(--muted);font-size:12px;padding:24px 2px 10px}.cloud-panel{margin:18px 0 14px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.cloud-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.cloud-status{font-size:13px;color:var(--muted);margin:8px 0 0}.cloud-status.ok{color:var(--green)}.cloud-status.warn{color:var(--orange)}.cloud-user{font-size:13px;color:var(--muted);margin-left:auto}.cloud-panel h2{font-size:17px;margin:0 0 5px}.cloud-panel p{font-size:13px;color:var(--muted);margin:0 0 12px}.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#172033;color:white;padding:10px 15px;border-radius:10px;display:none;z-index:10;max-width:90vw;font-size:13px}
+@media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}.week-grid,.bottom-grid{grid-template-columns:1fr}main{padding:14px}.hero{padding:24px 16px 28px}.stat{padding:12px}.stat .num{font-size:23px}.toolbar{margin-top:18px}.toolbar button{flex:1}}
+@media print{.hero{background:#222!important}.toolbar,.bottom-grid button{display:none}.stats{margin-top:12px}.day-card,.stat{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<div class="eyebrow">Your personal learning dashboard</div>
+<h1>Career Growth Tracker</h1>
+<p>Secure your next Odoo role first. Build deeper Python skills, then move into backend development and AWS deployment—one focused hour at a time.</p>
+<div class="hero-tags"><span class="tag">60 min/day</span><span class="tag">Odoo interview prep</span><span class="tag">Python depth</span><span class="tag">AWS & deployment</span></div>
+</div></header>
+<main>
+<section class="cloud-panel">
+  <h2>Sync across your devices</h2>
+  <p>Sign in with Google to save your checklist, notes and weekly reviews to your private cloud account.</p>
+  <div class="cloud-row">
+    <button class="btn primary" id="googleLoginBtn">Continue with Google</button>
+    <button class="btn" id="logoutBtn" hidden>Sign out</button>
+    <span class="cloud-user" id="cloudUser"></span>
+  </div>
+  <div class="cloud-status warn" id="cloudStatus">Cloud sync needs your Supabase project settings. Until configured, progress remains saved in this browser.</div>
+</section>
+<section class="stats">
+<div class="stat"><div class="label">Overall completion</div><div class="num" id="overallNum">0%</div><div class="bar"><span id="overallBar"></span></div></div>
+<div class="stat"><div class="label">Tasks completed</div><div class="num" id="doneNum">0/0</div><div class="label">Across the roadmap</div></div>
+<div class="stat"><div class="label">Current week</div><div class="num" id="weekNum">1</div><div class="label" id="weekName">Odoo + Python foundations</div></div>
+<div class="stat"><div class="label">Study streak</div><div class="num" id="streakNum">0 days</div><div class="label">Based on days you mark complete</div></div>
+</section>
+<div class="toolbar">
+<select id="weekSelect" aria-label="Choose study week"></select>
+<button class="btn" id="todayBtn">Go to current week</button>
+<button class="btn" id="exportBtn">Export backup</button>
+<button class="btn" id="importBtn">Import backup</button>
+<input type="file" id="importFile" accept="application/json" hidden>
+<button class="btn" id="printBtn">Print / PDF</button>
+</div>
+<div class="section-head"><div><h2 id="weekTitle">Week 1</h2><p id="weekDescription">Start with the foundations that help you interview confidently.</p></div><span class="pill" id="weekPercent">0% complete</span></div>
+<div class="bar" style="margin-bottom:14px"><span id="weekBar"></span></div>
+<div class="week-grid" id="days"></div>
+<div class="bottom-grid">
+<section class="panel"><h3>Weekly review</h3><p>Use this at the end of each week. Your notes are saved in this browser.</p>
+<label class="note-label" for="wins">What did I learn well?</label><textarea class="notes" id="wins" placeholder="Concepts I can now explain without notes…"></textarea>
+<label class="note-label" for="gaps">What needs revision?</label><textarea class="notes" id="gaps" placeholder="Topics I found difficult…"></textarea>
+<label class="note-label" for="next">My priority next week</label><textarea class="notes" id="next" placeholder="One realistic improvement…"></textarea>
+<button class="btn primary" id="saveReview" style="margin-top:10px">Save weekly review</button></section>
+<section class="panel"><h3>How to use this tracker</h3><ul>
+<li>Plan for one hour: 10 min revision, 25 min learning, 20 min coding, 5 min speaking practice.</li>
+<li>Tick a task only when you can explain it or complete the practical exercise.</li>
+<li>Use spare office time for coding problems only when your work and workplace policy allow it.</li>
+<li>Apply to Odoo roles while studying; don't wait until the roadmap is finished.</li>
+<li>Export a backup regularly. Browser storage stays on this browser/device and does not automatically sync to your phone.</li>
+</ul><p><strong>Career sequence:</strong> Odoo interview readiness → Python depth → FastAPI + PostgreSQL → Docker/Linux/CI-CD → AWS deployment.</p></section>
+</div>
+<div class="footer">Progress is saved locally and, after Google sign-in and Supabase setup, synced to your private cloud account. Keep occasional JSON backups as an extra safeguard.</div>
+</main><div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const weeks = [
+{title:"Odoo + Python foundations",desc:"Build a strong interview base and connect Python fundamentals to Odoo development.",days:[
+["Day 1 · Monday","Odoo ORM concepts + Python data types",[["odoo","ORM basics: env, recordsets, create(), browse(), search(), write(), unlink()","Explain recordsets and practise CRUD on a sample model."],["python","Python data types: int, float, str, bool, None; type() and isinstance()","Predict types and outputs; explain mutable vs immutable at a basic level."],["practice","Coding: count character frequency with a dictionary","Test empty input, repeated characters and mixed case."],["interview","Speak aloud: what is the Odoo ORM?","Give a 60–90 second answer without notes."]]],
+["Day 2 · Tuesday","Python collections + Odoo fields",[["python","list, tuple, set, dict; indexing, slicing, membership","Compare when to use each collection."],["odoo","Char, Text, Integer, Float, Boolean, Date, Datetime, Selection, Monetary","Create a field cheat sheet with examples."],["practice","Remove duplicates while preserving order","Try a list with repeated values."],["interview","Explain Many2one vs One2many vs Many2many","Give a real business example for each."]]],
+["Day 3 · Wednesday","Functions + computed fields",[["python","Functions, parameters, defaults, return, scope","Write small pure functions and test inputs."],["odoo","@api.depends, compute methods, store=True","Explain recomputation and dependencies."],["practice","Write a function to find the second-largest unique number","Handle short lists and duplicate values."],["interview","Explain computed field vs related field vs onchange","State when onchange is not enough for business logic."]]],
+["Day 4 · Thursday","OOP + model inheritance",[["python","Classes, objects, __init__, instance/class attributes","Create a Product or Employee class."],["odoo","_inherit, _name, _inherits, super()","Explain extension vs new model vs delegation."],["practice","Implement a class with validation and a method","Add a clear __repr__ method."],["interview","Explain how you extend an existing Odoo model","Use one real project example."]]],
+["Day 5 · Friday","Python exceptions + Odoo constraints",[["python","try/except/else/finally, raise, custom exceptions","Handle invalid input without hiding errors."],["odoo","@api.constrains, SQL constraints, UserError, ValidationError","Choose the correct validation layer for examples."],["practice","Validate a list of records and report bad values","Include edge cases."],["interview","Explain onchange vs constraints and server-side validation","Describe what happens during import/API calls."]]],
+["Day 6 · Saturday","Sales, purchase and inventory flow",[["odoo","Quotation → sales order → delivery → invoice/payment basics","Draw the flow and explain key records."],["odoo","Purchase order → receipt → vendor bill basics","Explain stock picking, move and quant."],["practice","Explain MTO vs reordering rules with an example","Describe configuration and replenishment outcome."],["career","Write one STAR story from a real customization or bug fix","Protect client confidentiality; focus on your contribution."]]],
+["Day 7 · Sunday","Weekly revision + mock interview",[["revision","Revise Days 1–6; redo any missed task","Mark a topic complete only if you can explain it."],["mock","Answer 5 Odoo/Python questions aloud","Keep answers clear, structured and concise."],["coding","Solve 2 easy string/list/dictionary problems","Write tests and estimate time complexity."],["career","Review applications and choose next week's weak topics","Record wins, gaps and next priority."]]]
+]},
+{title:"Python functions, Odoo security & ORM",desc:"Understand how Python works and how Odoo enforces access and business rules.",days:[
+["Day 8 · Monday","Mutable objects, references and copying",[["python","Identity vs equality; mutability; shallow vs deep copy","Demonstrate nested list copy behaviour."],["odoo","Recordsets, singleton errors, ensure_one(), mapped(), filtered(), sorted()","Write examples of recordset operations."],["practice","Flatten a nested list one level","Test empty and mixed-length inputs."],["interview","Explain recordsets and common ORM pitfalls","Mention batch operations."]]],
+["Day 9 · Tuesday","Arguments, scope, lambda and closures",[["python","Positional/keyword-only args, *args, **kwargs, LEGB scope","Write functions that accept flexible arguments."],["odoo","Context, with_context(), default_get()","Explain context versus a regular field value."],["practice","Sort dictionaries by a chosen key","Handle missing keys."],["interview","Explain context and defaults in Odoo","Give a wizard or default value example."]]],
+["Day 10 · Wednesday","Decorators and Odoo API decorators",[["python","First-class functions, closures and decorators","Write a simple timing decorator."],["odoo","@api.model, @api.depends, @api.onchange, @api.constrains","Explain purpose and limitations of each."],["practice","Create a decorator that logs function calls","Test return values and exceptions."],["interview","Explain a decorator using a small example","Avoid memorized definitions only."]]],
+["Day 11 · Thursday","Odoo access rights and record rules",[["odoo","ir.model.access.csv, groups, ACLs, record rules","Trace access for a user/group."],["python","Exceptions and propagation through call stack","Use specific exception handling."],["practice","Diagnose an AccessError scenario","Explain least-privilege access."],["interview","What does sudo() do and what risks does it create?","Describe safe use and access checks."]]],
+["Day 12 · Friday","Domains, search and SQL basics",[["odoo","Domains, search(), search_count(), name_search(), search_read()","Translate requirements into domains."],["sql","SELECT, WHERE, ORDER BY, JOIN, GROUP BY","Write three queries against sample tables."],["practice","Find duplicate values using a dictionary or SQL","Explain your approach."],["interview","When would you use ORM vs SQL?","Discuss security, maintainability and performance."]]],
+["Day 13 · Saturday","Computed fields, onchange and constraints",[["odoo","Stored vs non-stored computed fields; dependencies","Trace when recomputation occurs."],["odoo","Onchange limitations; constraints; SQL constraints","Choose the right validation mechanism."],["practice","Design a total amount computed field","List dependencies and edge cases."],["career","Add one technical project story to your interview notes","Describe problem, action and result."]]],
+["Day 14 · Sunday","Week 2 review and coding",[["revision","Review functions, decorators, context, security and domains","Teach the concepts aloud."],["coding","Solve 2 easy problems using dict/set","Test boundary cases."],["mock","Answer 8 interview questions under time limit","Record weak answers."],["career","Review progress and job postings","Save roles that match your experience."]]]
+]},
+{title:"Python internals, SQL & performance",desc:"Move from writing working code to writing efficient, reliable code.",days:[
+["Day 15 · Monday","Iterables, iterators and generators",[["python","iter(), next(), yield, generator expressions","Build a generator for batches."],["odoo","Prefetching and recordset iteration","Understand why repeated field reads can be expensive."],["practice","Generate Fibonacci numbers lazily","Stop at a defined limit."],["interview","Iterable vs iterator vs generator","Explain memory benefits."]]],
+["Day 16 · Tuesday","Comprehensions and functional tools",[["python","Comprehensions, enumerate, zip, any, all","Refactor a loop without harming readability."],["odoo","mapped(), filtered(), sorted() and batch patterns","Compare readable recordset code."],["practice","Group records by a key using a dictionary","Test empty input."],["interview","Explain readability vs clever one-liners","Use practical examples."]]],
+["Day 17 · Wednesday","Big-O, strings and arrays",[["dsa","Time/space complexity; strings and arrays","Estimate complexity for common operations."],["dsa","Two pointers and frequency counting","Solve one easy problem."],["practice","Check whether two strings are anagrams","Handle spaces/case as specified."],["interview","Explain O(n) vs O(n²)","Use a concrete example."]]],
+["Day 18 · Thursday","PostgreSQL joins, indexes and transactions",[["sql","INNER/LEFT JOIN, GROUP BY, HAVING and subqueries","Write sample reporting queries."],["sql","Indexes, EXPLAIN basics, transactions and ACID","Explain index trade-offs."],["practice","Query totals grouped by customer","Check joins don't duplicate totals."],["interview","How do you investigate a slow query?","Discuss query plan and indexing."]]],
+["Day 19 · Friday","Odoo performance and batching",[["odoo","N+1 queries, batch create/write, prefetch and read_group","Identify a slow ORM pattern."],["odoo","Avoid SQL in loops; cache invalidation basics","Understand ORM consistency concerns."],["practice","Refactor a loop that performs one search per record","Describe expected query reduction."],["interview","How would you optimize a slow Odoo screen/report?","Use measurement before assumptions."]]],
+["Day 20 · Saturday","Debugging and automated tests",[["python","Logging, tracebacks, assertions and debugging","Read a traceback from the bottom upward."],["odoo","Odoo TransactionCase, test tags and test data basics","Outline a model test."],["practice","Write tests for a function with edge cases","Include valid and invalid inputs."],["career","Prepare a bug-fix story with root cause","Explain how you verified the fix."]]],
+["Day 21 · Sunday","Week 3 review",[["revision","Revise generators, complexity, SQL and performance","Revisit two weakest concepts."],["coding","Solve 2 easy problems and one SQL task","Use a timer."],["mock","Explain a performance issue and resolution","Be specific and honest."],["career","Review applications and weekly notes","Choose next week's focus."]]]
+]},
+{title:"Advanced Python, APIs & Odoo web",desc:"Prepare for framework questions and start thinking like a backend developer.",days:[
+["Day 22 · Monday","Advanced OOP and MRO",[["python","Composition, inheritance, super(), MRO, properties","Inspect a small multiple-inheritance example."],["python","Dunder methods and dataclasses","Implement __repr__ and equality."],["practice","Model a simple shopping cart","Separate data from behaviour."],["interview","Composition vs inheritance","Explain trade-offs."]]],
+["Day 23 · Tuesday","Modules, environments and packaging",[["python","Imports, __name__, packages, venv and pip","Create a clean project environment."],["python","Dependency pinning and requirements files","Explain reproducible environments."],["practice","Create a small importable utility package","Run it from a separate script."],["interview","How do you manage dependencies across environments?","Mention version compatibility."]]],
+["Day 24 · Wednesday","pytest and mocking",[["testing","pytest, fixtures, parametrization and assertions","Write tests for edge cases."],["testing","Mocking API calls and isolating dependencies","Test a failure response."],["practice","Test a function that validates an order payload","Include invalid data."],["interview","Unit test vs integration test","Give examples from backend work."]]],
+["Day 25 · Thursday","Odoo controllers and HTTP",[["odoo","Controllers, routes, auth modes, HTTP vs JSON routes","Explain request/response lifecycle."],["api","REST methods, status codes, JSON payloads","Design a simple endpoint."],["practice","Write pseudocode for a secure read-only API endpoint","Validate inputs and permissions."],["interview","How do you secure a custom Odoo controller?","Discuss auth, access checks and validation."]]],
+["Day 26 · Friday","Views, QWeb, wizards and assets",[["odoo","View inheritance, XPath, domains and context","Debug a failed inherited view."],["odoo","QWeb reports, transient models and wizard flow","Explain report rendering."],["practice","Outline a wizard that exports a filtered report","List validation and access checks."],["interview","How do you debug an XML ParseError or XPath failure?","Explain checking parent view and target node."]]],
+["Day 27 · Saturday","Integrations and scheduled jobs",[["api","REST integrations, auth headers, pagination and rate limits","Design a retry-safe sync."],["odoo","Cron jobs, idempotency, webhooks and failure logging","Avoid duplicate processing."],["practice","Sketch a sync job with retry and error handling","Identify secrets and timeouts."],["career","Prepare one integration story from your experience","Explain failure handling."]]],
+["Day 28 · Sunday","Week 4 review",[["revision","Revise OOP, testing, controllers and integration","Explain without notes."],["coding","Solve 2 problems and review complexity","Write tests."],["mock","Run a Python/Odoo mock interview","List weak points."],["career","Update resume bullets with measurable impact where truthful","Prepare applications."]]]
+]},
+{title:"Interview readiness + production basics",desc:"Sharpen interview performance and understand how applications run in real environments.",days:[
+["Day 29 · Monday","Stacks, queues, sets and dictionaries",[["dsa","Stack, queue, hash map and set use cases","Implement stack behaviour with a list."],["dsa","Time complexity of lookup, insertion and deletion","Compare list and set membership."],["practice","Validate balanced parentheses","Test nested and invalid inputs."],["interview","Explain dictionary hashing at a high level","Keep it clear and accurate."]]],
+["Day 30 · Tuesday","Algorithms: binary search and sorting",[["dsa","Binary search preconditions and implementation","Test empty and boundary cases."],["dsa","Sorting, key functions and stable sorting","Compare built-in sorting with manual approaches."],["practice","Find first occurrence of a target in sorted data","Handle missing targets."],["interview","Explain the time complexity of binary search","Explain why sorted input matters."]]],
+["Day 31 · Wednesday","REST API and authentication",[["api","HTTP verbs, status codes, JSON and pagination","Design a consistent response schema."],["api","API keys vs tokens, OAuth basics and secrets","Discuss safe storage of credentials."],["practice","Create a sample API contract for products","Include validation errors."],["interview","How do you handle API timeouts and retries?","Avoid retrying non-idempotent writes blindly."]]],
+["Day 32 · Thursday","Linux, Git and environment configuration",[["linux","Processes, ports, logs, permissions and environment variables","Practise common commands in a safe environment."],["git","Branching, commits, merge conflicts and pull requests","Explain your team workflow."],["practice","Diagnose a service that cannot connect to PostgreSQL","Check logs, host, port and credentials safely."],["interview","Walk through your deployment/debugging process","Use a systematic checklist."]]],
+["Day 33 · Friday","Docker fundamentals",[["docker","Images, containers, Dockerfile, volumes and networks","Explain image vs container."],["docker","Compose, environment variables and health checks","Describe app + database setup."],["practice","Containerize a small Python API locally","Do not put secrets in the image."],["interview","How do you debug a container that keeps restarting?","Check logs, exit code and configuration."]]],
+["Day 34 · Saturday","Odoo deployment and production readiness",[["odoo","Config files, workers, proxy basics, addons path and logs","Explain development vs production configuration."],["ops","Backups, restore testing, database migrations and filestore","Describe a safe rollback plan."],["security","HTTPS, least privilege, secrets and patching","Identify production risks."],["practice","Write a deployment checklist for an Odoo instance","Include verification after deployment."]]],
+["Day 35 · Sunday","Week 5 review + mock interview",[["mock","Run one timed Odoo technical mock","ORM, security, integrations and performance."],["coding","Solve 2 timed easy problems","Explain complexity and edge cases."],["ops","Explain Docker and Odoo deployment aloud","Draw a simple architecture."],["career","Review job applications and interview feedback","Adjust target roles."]]]
+]},
+{title:"AWS fundamentals + deployment",desc:"Learn practical deployment skills: networking, security, managed databases, monitoring and recovery.",days:[
+["Day 36 · Monday","AWS account safety, IAM and billing",[["aws","Regions, Availability Zones, shared responsibility model","Explain high availability at a high level."],["aws","IAM users/roles/policies, MFA and least privilege","Never share root credentials or access keys."],["aws","Budgets, billing alerts and free-tier limits","Check current pricing before creating resources."],["practice","Draw a secure deployment architecture","Identify where secrets should live."]]],
+["Day 37 · Tuesday","EC2 and Linux server basics",[["aws","EC2 instances, AMIs, key pairs and instance roles","Explain how a VM is launched."],["aws","SSH, security groups, inbound/outbound rules","Allow only required ports; avoid opening SSH to everyone."],["practice","Write a server setup checklist for Python/Odoo","Include updates, user permissions and logs."],["interview","EC2 vs a managed application platform","Explain control vs operational effort."]]],
+["Day 38 · Wednesday","VPC, networking and DNS",[["aws","VPC, public/private subnets, route tables, internet/NAT gateways","Trace how traffic reaches a server."],["aws","Security groups vs network ACLs; DNS and TLS basics","Explain the purpose of HTTPS."],["practice","Draw public web tier + private database network","Keep the database off the public internet."],["interview","How would you restrict database access?","Use private networking and narrow rules."]]],
+["Day 39 · Thursday","S3, RDS and data protection",[["aws","S3 buckets, object permissions, encryption and lifecycle","Explain safe file storage."],["aws","RDS PostgreSQL, backups, snapshots and private connectivity","Discuss backup retention and restore tests."],["practice","Design backup/restore for an Odoo database and filestore","Treat both as related recovery components."],["interview","How do you recover after accidental data loss?","Explain tested backups and recovery point/time."]]],
+["Day 40 · Friday","Deploy a Python API on AWS",[["aws","Choose a small practice deployment and estimate costs first","Set a budget and remove unused resources."],["deploy","Deploy a simple FastAPI app to a small EC2 instance or suitable managed service","Use environment configuration and HTTPS."],["deploy","Use a service manager/container, reverse proxy and logs","Do not expose debug mode publicly."],["practice","Document deployment steps and rollback","Verify health endpoint and logs."]]],
+["Day 41 · Saturday","Cloud monitoring, CI/CD and security",[["aws","CloudWatch logs, metrics, alarms and basic dashboards","Choose useful health signals."],["devops","CI/CD concepts, automated tests and deployment stages","Explain build, test, deploy and rollback."],["security","Secrets management, IAM roles, patching and dependency updates","Rotate credentials if exposed."],["practice","Draw a CI/CD pipeline for your API","Include tests and deployment approval."]]],
+["Day 42 · Sunday","AWS review + career checkpoint",[["revision","Review IAM, EC2, VPC, S3, RDS and CloudWatch","Explain each service and why it is used."],["practice","Present your deployment architecture and demo","Show health checks, logs and secure configuration."],["career","Update resume with deployment work only after you have actually done it","Include the repo and setup documentation."],["plan","Choose the next roadmap: FastAPI project, deeper Odoo prep or AWS practice","Use interview results to prioritize."]]]
+]}
+];
+const STORAGE="careerGrowthTracker_v1";
+// Replace these two placeholders with your Supabase Project URL and publishable/anon key.
+// Never put a Supabase service_role key in this file.
+const SUPABASE_URL="YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY="YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY";
+const $=id=>document.getElementById(id);
+let state={checks:{},notes:{},reviews:{}};
+try{const saved=localStorage.getItem(STORAGE);if(saved)state={...state,...JSON.parse(saved)}}catch(e){}
+let supabaseClient=null,currentUser=null,cloudLoadInProgress=false,syncTimer=null;
+const cloudConfigured=SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("YOUR_") && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.includes("YOUR_");
+if(cloudConfigured && window.supabase?.createClient){supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);}
+function setCloudStatus(message,kind="warn"){const el=$("cloudStatus");el.textContent=message;el.className="cloud-status "+kind;}
+function updateCloudUI(){
+  $("googleLoginBtn").hidden=!!currentUser;
+  $("logoutBtn").hidden=!currentUser;
+  $("cloudUser").textContent=currentUser?(currentUser.email||"Signed in with Google"):"";
+  if(!cloudConfigured){setCloudStatus("Setup needed: add your Supabase project URL and publishable/anon key to index.html. Local saving still works.","warn");return;}
+  if(currentUser)setCloudStatus("Signed in. Your progress will sync automatically.","ok");
+  else setCloudStatus("Not signed in. Sign in with Google to enable cross-device sync.","warn");
+}
+async function syncStateNow(){
+  if(!supabaseClient||!currentUser||cloudLoadInProgress)return;
+  setCloudStatus("Syncing your progress…","warn");
+  const {error}=await supabaseClient.from("career_tracker_data").upsert(
+    {user_id:currentUser.id,data:state,updated_at:new Date().toISOString()},
+    {onConflict:"user_id"}
+  );
+  if(error){setCloudStatus("Cloud sync failed: "+error.message+" — your local copy is still saved.","warn");return;}
+  setCloudStatus("All progress synced to your Google account.","ok");
+}
+function scheduleCloudSync(){
+  if(!currentUser||!supabaseClient||cloudLoadInProgress)return;
+  clearTimeout(syncTimer);
+  syncTimer=setTimeout(()=>{syncStateNow()},700);
+}
+async function loadCloudState(){
+  if(!supabaseClient||!currentUser)return;
+  cloudLoadInProgress=true;
+  setCloudStatus("Loading your saved cloud progress…","warn");
+  const {data,error}=await supabaseClient.from("career_tracker_data").select("data").eq("user_id",currentUser.id).maybeSingle();
+  if(error){cloudLoadInProgress=false;setCloudStatus("Could not load cloud data: "+error.message+" — check the Supabase SQL/RLS setup.","warn");return;}
+  if(data&&data.data){
+    const cloudState=data.data;
+    state={checks:cloudState.checks||{},notes:cloudState.notes||{},reviews:cloudState.reviews||{}};
+    try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(e){}
+    renderWeek();
+    setCloudStatus("Cloud progress loaded. Changes will sync automatically.","ok");
+  }else{
+    // First sign-in on this account: upload this browser's current progress.
+    cloudLoadInProgress=false;
+    await syncStateNow();
+    updateCloudUI();
+    return;
+  }
+  cloudLoadInProgress=false;
+  updateCloudUI();
+}
+async function initCloudAuth(){
+  if(!cloudConfigured||!supabaseClient){updateCloudUI();$("googleLoginBtn").addEventListener("click",()=>setCloudStatus("Add your Supabase URL and publishable/anon key to enable Google sign-in.","warn"));return;}
+  $("googleLoginBtn").addEventListener("click",async()=>{
+    const {error}=await supabaseClient.auth.signInWithOAuth({provider:"google",options:{redirectTo:window.location.href}});
+    if(error)setCloudStatus("Google sign-in could not start: "+error.message,"warn");
+  });
+  $("logoutBtn").addEventListener("click",async()=>{
+    const {error}=await supabaseClient.auth.signOut();
+    if(error)setCloudStatus("Could not sign out: "+error.message,"warn");
+  });
+  const {data:{session}}=await supabaseClient.auth.getSession();
+  currentUser=session?.user||null;
+  updateCloudUI();
+  if(currentUser)await loadCloudState();
+  supabaseClient.auth.onAuthStateChange((event,session)=>{
+    currentUser=session?.user||null;
+    updateCloudUI();
+    if(currentUser && event==="SIGNED_IN")setTimeout(()=>loadCloudState(),0);
+  });
+}
+function save(){
+  try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(e){toast("Could not save locally. Export a backup.")}
+  renderStats();
+  scheduleCloudSync();
+}
+function toast(msg){const t=$("toast");t.textContent=msg;t.style.display="block";setTimeout(()=>t.style.display="none",2200)}
+function taskKey(w,d,t){return `${w}-${d}-${t}`}
+function renderStats(){
+ const tasks=[];weeks.forEach((w,wi)=>w.days.forEach((d,di)=>d[2].forEach((t,ti)=>tasks.push(taskKey(wi,di,ti)))));
+ const done=tasks.filter(k=>state.checks[k]).length,pct=tasks.length?Math.round(done/tasks.length*100):0;
+ $("overallNum").textContent=pct+"%";$("overallBar").style.width=pct+"%";$("doneNum").textContent=`${done}/${tasks.length}`;
+ const selected=+$("weekSelect").value||0;const w=weeks[selected];const wt=[];w.days.forEach((d,di)=>d[2].forEach((t,ti)=>wt.push(taskKey(selected,di,ti))));
+ const wp=Math.round(wt.filter(k=>state.checks[k]).length/wt.length*100);
+ $("weekNum").textContent=selected+1;$("weekName").textContent=w.title;$("weekPercent").textContent=wp+"% complete";$("weekBar").style.width=wp+"%";
+ const completedDates=Object.keys(state.checks).filter(k=>state.checks[k]).map(k=>k.split("-").slice(0,2).join("-"));
+ $("streakNum").textContent=new Set(completedDates).size+" study days";
+}
+function renderWeek(){
+ const wi=+$("weekSelect").value||0,w=weeks[wi];$("weekTitle").textContent=`Week ${wi+1} · ${w.title}`;$("weekDescription").textContent=w.desc;
+ const root=$("days");root.innerHTML="";
+ w.days.forEach((day,di)=>{
+  const card=document.createElement("article");card.className="day-card";
+  const header=document.createElement("div");header.className="day-top";
+  const title=document.createElement("div");const h=document.createElement("h3");h.textContent=day[0];const sub=document.createElement("div");sub.className="day-sub";sub.textContent="Target: 60 minutes";title.append(h,sub);
+  const pill=document.createElement("span");pill.className="pill";header.append(title,pill);card.append(header);
+  day[2].forEach((task,ti)=>{
+   const key=taskKey(wi,di,ti),row=document.createElement("div");row.className="task";
+   const cb=document.createElement("input");cb.type="checkbox";cb.id="c-"+key;cb.checked=!!state.checks[key];cb.addEventListener("change",()=>{state.checks[key]=cb.checked;save();renderWeek()});
+   const label=document.createElement("label");label.htmlFor=cb.id;const strong=document.createElement("strong");strong.textContent=task[0].toUpperCase()+" · "+task[1];const small=document.createElement("small");small.textContent=task[2];label.append(strong,small);row.append(cb,label);card.append(row);
+  });
+  const noteLabel=document.createElement("label");noteLabel.className="note-label";noteLabel.textContent="My notes / questions";
+  const notes=document.createElement("textarea");notes.className="notes";notes.placeholder="What did I understand? What should I revise?";notes.value=state.notes[`${wi}-${di}`]||"";
+  notes.addEventListener("input",()=>{state.notes[`${wi}-${di}`]=notes.value;try{localStorage.setItem(STORAGE,JSON.stringify(state))}catch(e){}scheduleCloudSync();});
+  card.append(noteLabel,notes);
+  const completed=day[2].filter((t,ti)=>state.checks[taskKey(wi,di,ti)]).length;pill.textContent=`${completed}/${day[2].length} tasks`;if(completed===day[2].length)pill.classList.add("done");
+  root.append(card);
+ });
+ const review=state.reviews[wi]||{};$("wins").value=review.wins||"";$("gaps").value=review.gaps||"";$("next").value=review.next||"";renderStats();
+}
+function populate(){weeks.forEach((w,i)=>{const o=document.createElement("option");o.value=i;o.textContent=`Week ${i+1} — ${w.title}`;$("weekSelect").append(o)});$("weekSelect").value="0";renderWeek()}
+$("weekSelect").addEventListener("change",renderWeek);
+$("todayBtn").addEventListener("click",()=>{$("weekSelect").value="0";renderWeek();window.scrollTo({top:0,behavior:"smooth"})});
+$("saveReview").addEventListener("click",()=>{const i=+$("weekSelect").value;state.reviews[i]={wins:$("wins").value,gaps:$("gaps").value,next:$("next").value};save();toast(currentUser?"Weekly review saved and syncing.":"Weekly review saved on this device.")});
+$("exportBtn").addEventListener("click",()=>{const blob=new Blob([JSON.stringify({state,exportedAt:new Date().toISOString()},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="career-growth-backup.json";a.click();URL.revokeObjectURL(a.href);toast("Backup exported.")});
+$("importBtn").addEventListener("click",()=>$("importFile").click());
+$("importFile").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{const obj=JSON.parse(await f.text());const incoming=obj.state||obj;if(!incoming.checks)throw Error("Invalid backup");state={...state,...incoming,checks:{...state.checks,...incoming.checks},notes:{...state.notes,...incoming.notes},reviews:{...state.reviews,...incoming.reviews}};save();renderWeek();toast("Backup imported.")}catch(err){toast("Could not read that backup file.")}e.target.value=""});
+$("printBtn").addEventListener("click",()=>window.print());
+populate();
+initCloudAuth();
+</script>
+</body></html>
